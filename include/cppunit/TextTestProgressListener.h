@@ -25,6 +25,8 @@ public:
 
   void addFailure( const TestFailure &failure );
 
+  void addSkipped( const TestSkipped &skipped );
+
   void endTestRun( Test *test, 
                    TestResult *eventManager );
 

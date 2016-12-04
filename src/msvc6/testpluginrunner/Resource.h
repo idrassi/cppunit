@@ -1,5 +1,5 @@
 //{{NO_DEPENDENCIES}}
-// Microsoft Developer Studio generated include file.
+// Microsoft Visual C++ generated include file.
 // Used by TestPlugInRunner.rc
 //
 #define IDS_ERROR_SELECT_TEST           1
@@ -20,11 +20,11 @@
 #define IDC_STATIC_ERRORS               1008
 #define IDC_STATIC_FAILURES             1009
 #define IDC_EDIT_TIME                   1010
-#define IDC_BUTTON1                     1011
 #define IDC_BROWSE_TEST                 1011
 #define IDC_TREE_TEST                   1012
-#define IDC_DETAILS                     1012
-#define IDC_CHECK_AUTORUN               1013
+#define IDC_DETAILS                     1013
+#define IDC_CHECK_AUTORUN               1014
+#define IDC_STATIC_SKIPPED              1015
 #define IDC_RUNNING_TEST_CASE_LABEL     1016
 #define IDC_STATIC_TEST_NAME            1017
 #define IDC_STATIC_PROGRESS             1018
@@ -33,6 +33,7 @@
 #define IDC_STATIC_LABEL_FAILURES       1021
 #define IDC_STATIC_PROGRESS_BAR         1022
 #define IDC_STATIC_DETAILS              1023
+#define IDC_STATIC_LABEL_SKIPPED        1024
 #define IDC_CHOOSE_DLL                  1040
 #define IDC_RELOAD_DLL                  1041
 #define ID_QUIT_APPLICATION             32771

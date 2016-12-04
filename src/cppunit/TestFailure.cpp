@@ -68,4 +68,57 @@ TestFailure::clone() const
 }
 
 
+/// Constructs a TestFailure with the given test and exception.
+TestSkipped::TestSkipped( Test *skippedTest, 
+                          SkipException *thrownException) :
+    m_skippedTest( skippedTest ), 
+    m_thrownException( thrownException )
+{
+}
+
+/// Deletes the owned exception.
+TestSkipped::~TestSkipped()
+{ 
+  delete m_thrownException; 
+}
+
+/// Gets the failed test.
+Test *
+TestSkipped::skippedTest() const
+{ 
+  return m_skippedTest; 
+}
+
+
+/// Gets the thrown exception. Never \c NULL.
+Exception *
+TestSkipped::thrownException() const
+{ 
+  return m_thrownException; 
+}
+
+
+/// Gets the failure location.
+SourceLine 
+TestSkipped::sourceLine() const
+{
+  return m_thrownException->sourceLine();
+}
+
+
+/// Gets the name of the failed test.
+std::string 
+TestSkipped::skippedTestName() const
+{
+  return m_skippedTest->getName();
+}
+
+
+TestSkipped *
+TestSkipped::clone() const
+{
+  return new TestSkipped( m_skippedTest, m_thrownException->clone());
+}
+
+
 CPPUNIT_NS_END

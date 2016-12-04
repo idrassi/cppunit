@@ -178,6 +178,15 @@ void CPPUNIT_API assertDoubleEquals( double expected,
                                                      message ),         \
                                 CPPUNIT_SOURCELINE() ) )
 
+/** Skips with the specified message.
+ * \ingroup Assertions
+ * \param message Message reported in diagnostic.
+ */
+#define CPPUNIT_SKIP( message )                                         \
+  ( CPPUNIT_NS::Asserter::skip( CPPUNIT_NS::Message( "Skipped",  \
+                                                     message ),         \
+                                CPPUNIT_SOURCELINE() ) )
+
 #ifdef CPPUNIT_ENABLE_SOURCELINE_DEPRECATED
 /// Generalized macro for primitive value comparisons
 #define CPPUNIT_ASSERT_EQUAL(expected,actual)                     \

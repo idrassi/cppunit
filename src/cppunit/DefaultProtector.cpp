@@ -14,6 +14,10 @@ DefaultProtector::protect( const Functor &functor,
   {
     return functor();
   }
+  catch ( SkipException &skipped )
+  {
+    reportSkipped( context, skipped );
+  }
   catch ( Exception &failure )
   {
     reportFailure( context, failure );

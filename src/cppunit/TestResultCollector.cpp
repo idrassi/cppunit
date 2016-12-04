@@ -27,6 +27,14 @@ TestResultCollector::freeFailures()
   m_failures.clear();
 }
 
+void 
+TestResultCollector::freeSkipped()
+{
+  TestsSkipped::iterator itSkipped = m_skipped.begin();
+  while ( itSkipped != m_skipped.end() )
+    delete *itSkipped++;
+  m_skipped.clear();
+}
 
 void 
 TestResultCollector::reset()
@@ -35,7 +43,9 @@ TestResultCollector::reset()
 
   ExclusiveZone zone( m_syncObject ); 
   freeFailures();
+  freeSkipped();
   m_testErrors = 0;
+  m_testsSkipped = 0;
   m_tests.clear();
 }
 
@@ -59,6 +69,15 @@ TestResultCollector::addFailure( const TestFailure &failure )
   m_failures.push_back( failure.clone() );
 }
 
+void 
+TestResultCollector::addSkipped( const TestSkipped &skipped )
+{
+  TestSuccessListener::addSkipped( skipped );
+
+  ExclusiveZone zone( m_syncObject ); 
+  ++m_testsSkipped;
+  m_skipped.push_back( skipped.clone() );
+}
 
 /// Gets the number of run tests.
 int 
@@ -77,6 +96,12 @@ TestResultCollector::testErrors() const
   return m_testErrors;
 }
 
+int 
+TestResultCollector::testsSkipped() const
+{ 
+  ExclusiveZone zone( m_syncObject );
+  return m_testsSkipped;
+}
 
 /// Gets the number of detected failures (failed assertion).
 int 

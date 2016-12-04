@@ -24,6 +24,8 @@ public:
 
   void addFailure( const TestFailure &failure );
 
+  void addSkipped( const TestSkipped &skipped );
+
   void endTest( Test *test );
 
 private:
@@ -35,6 +37,7 @@ private:
 
 private:
   bool m_lastTestFailed;
+  bool m_lastTestSkipped;
 };
 
 

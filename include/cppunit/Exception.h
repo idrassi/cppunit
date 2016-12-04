@@ -83,6 +83,41 @@ protected:
 };
 
 
+class CPPUNIT_API SkipException : public Exception
+{
+public:
+  /*! \brief Constructs the exception with the specified message and source location.
+   * \param message Message associated to the exception.
+   * \param sourceLine Source location related to the exception.
+   */
+  SkipException( const Message &message = Message(), 
+             const SourceLine &sourceLine = SourceLine() ) : Exception (message, sourceLine)
+  {
+  }
+
+#ifdef CPPUNIT_ENABLE_SOURCELINE_DEPRECATED
+  /*!
+   * \deprecated Use other constructor instead.
+   */
+  SkipException( std::string  message, 
+	     long lineNumber, 
+	     std::string fileName ) : Exception (message, lineNumber, fileName)
+  {
+  }
+#endif
+
+  SkipException( const SkipException &other ) : Exception (other)
+  {
+  }
+
+  /// Destructs the exception
+  virtual ~SkipException() throw() {}
+
+  /// Clones the exception.
+  virtual SkipException *clone() const;
+
+};
+
 CPPUNIT_NS_END
 
 

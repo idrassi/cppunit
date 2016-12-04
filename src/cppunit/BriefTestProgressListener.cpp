@@ -8,7 +8,7 @@ CPPUNIT_NS_BEGIN
 
 
 BriefTestProgressListener::BriefTestProgressListener()
-    : m_lastTestFailed( false )
+    : m_lastTestFailed( false ), m_lastTestSkipped( false )
 {
 }
 
@@ -35,6 +35,12 @@ BriefTestProgressListener::addFailure( const TestFailure &failure )
   m_lastTestFailed  = true;
 }
 
+void 
+BriefTestProgressListener::addSkipped( const TestSkipped &skipped )
+{
+  stdCOut() << " : " << "skipped";
+  m_lastTestSkipped  = true;
+}
 
 void 
 BriefTestProgressListener::endTest( Test * )

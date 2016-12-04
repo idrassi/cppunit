@@ -31,6 +31,12 @@ TextTestProgressListener::addFailure( const TestFailure &failure )
   stdCOut().flush();
 }
 
+void 
+TextTestProgressListener::addSkipped( const TestSkipped &skipped )
+{
+  stdCOut() << ("S" );
+  stdCOut().flush();
+}
 
 void 
 TextTestProgressListener::endTestRun( Test *, 

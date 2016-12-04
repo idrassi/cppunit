@@ -6,6 +6,7 @@
 CPPUNIT_NS_BEGIN
 
 class Exception;
+class SkipException;
 class Message;
 class ProtectorContext;
 class TestResult;
@@ -62,6 +63,9 @@ protected:
 
   void reportFailure( const ProtectorContext &context,
                       const Exception &failure ) const;
+
+  void reportSkipped( const ProtectorContext &context,
+                      const SkipException &skipped ) const;
 
   Message actualMessage( const Message &message,
                          const ProtectorContext &context ) const;

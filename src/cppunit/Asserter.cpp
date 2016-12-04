@@ -21,6 +21,19 @@ Asserter::fail( const Message &message,
   throw Exception( message, sourceLine );
 }
 
+void 
+Asserter::skip( std::string message, 
+                const SourceLine &sourceLine )
+{
+  skip( Message( "assertion failed", message ), sourceLine );
+}
+
+void 
+Asserter::skip( const Message &message, 
+                const SourceLine &sourceLine )
+{
+  throw SkipException( message, sourceLine );
+}
 
 void 
 Asserter::failIf( bool shouldFail, 

@@ -22,6 +22,12 @@ TextTestResult::addFailure( const TestFailure &failure )
   stdCOut() << ( failure.isError() ? "E" : "F" );
 }
 
+void 
+TextTestResult::addSkipped( const TestSkipped &skipped )
+{
+  TestResultCollector::addSkipped( skipped );
+  stdCOut() << ( "S" );
+}
 
 void 
 TextTestResult::startTest( Test *test )

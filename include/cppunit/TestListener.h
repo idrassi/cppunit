@@ -10,6 +10,7 @@ CPPUNIT_NS_BEGIN
 class Exception;
 class Test;
 class TestFailure;
+class TestSkipped;
 class TestResult;
 
 
@@ -105,6 +106,8 @@ public:
    *          method call. Use TestFailure::clone() to create a duplicate.
    */
   virtual void addFailure( const TestFailure & /*failure*/ ) {}
+
+  virtual void addSkipped( const TestSkipped & /*failure*/ ) {}
 
   /// Called just after a TestCase was run (even if a failure occured).
   virtual void endTest( Test * /*test*/ ) {}

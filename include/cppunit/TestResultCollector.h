@@ -37,6 +37,7 @@ class CPPUNIT_API TestResultCollector : public TestSuccessListener
 {
 public:
   typedef CppUnitDeque<TestFailure *> TestFailures;
+  typedef CppUnitDeque<TestSkipped *> TestsSkipped;
   typedef CppUnitDeque<Test *> Tests;
 
 
@@ -49,12 +50,14 @@ public:
 
   void startTest( Test *test );
   void addFailure( const TestFailure &failure );
+  void addSkipped( const TestSkipped &skipped );
 
   virtual void reset();
 
   virtual int runTests() const;
   virtual int testErrors() const;
   virtual int testFailures() const;
+  virtual int testsSkipped() const;
   virtual int testFailuresTotal() const;
 
   virtual const TestFailures& failures() const;
@@ -62,10 +65,13 @@ public:
 
 protected:
   void freeFailures();
+  void freeSkipped();
 
   Tests m_tests;
   TestFailures m_failures;
+  TestsSkipped m_skipped;
   int m_testErrors;
+  int m_testsSkipped;
 
 private:
   /// Prevents the use of the copy constructor.

@@ -16,11 +16,13 @@ CPPUNIT_NS_BEGIN
 
 
 class Exception;
+class SkipException;
 class Functor;
 class Protector;
 class ProtectorChain;
 class Test;
 class TestFailure;
+class TestSkipped;
 class TestListener;
 
 
@@ -84,6 +86,8 @@ public:
    */
   virtual void addFailure( Test *test, Exception *e );
 
+  virtual void addSkipped( Test *test, SkipException *e );
+
   /// Informs TestListener that a test was completed.
   virtual void endTest( Test *test );
 
@@ -128,6 +132,8 @@ protected:
   /*! \brief Called to add a failure to the list of failures.
    */
   void addFailure( const TestFailure &failure );
+
+  void addSkipped( const TestSkipped &skipped );
 
   virtual void startTestRun( Test *test );
   virtual void endTestRun( Test *test );

@@ -53,6 +53,12 @@ TestResult::addFailure( Test *test, Exception *e )
   addFailure( failure );
 }
 
+void 
+TestResult::addSkipped( Test *test, SkipException *e )
+{ 
+  TestSkipped skipped( test, e );
+  addSkipped( skipped );
+}
 
 void 
 TestResult::addFailure( const TestFailure &failure )
@@ -64,6 +70,15 @@ TestResult::addFailure( const TestFailure &failure )
     (*it)->addFailure( failure );
 }
 
+void 
+TestResult::addSkipped( const TestSkipped &skipped )
+{
+  ExclusiveZone zone( m_syncObject ); 
+  for ( TestListeners::iterator it = m_listeners.begin();
+        it != m_listeners.end(); 
+        ++it )
+    (*it)->addSkipped( skipped );
+}
 
 void 
 TestResult::startTest( Test *test )

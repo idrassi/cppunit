@@ -122,5 +122,10 @@ Exception::clone() const
   return new Exception( *this );
 }
 
+SkipException *
+SkipException::clone() const
+{
+  return new SkipException( *this );
+}
 
 CPPUNIT_NS_END

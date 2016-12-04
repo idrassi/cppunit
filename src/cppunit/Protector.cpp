@@ -48,6 +48,15 @@ Protector::reportFailure( const ProtectorContext &context,
                                 actualFailure.release() );
 }
 
+void 
+Protector::reportSkipped( const ProtectorContext &context,
+                          const SkipException &skipped ) const
+{
+  std::auto_ptr<SkipException> actualSkipped( skipped.clone() );
+  actualSkipped->setMessage( actualMessage( actualSkipped->message(), context ) );
+  context.m_result->addSkipped( context.m_test, 
+                                actualSkipped.release() );
+}
 
 Message 
 Protector::actualMessage( const Message &message,

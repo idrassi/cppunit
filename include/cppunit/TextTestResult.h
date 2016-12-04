@@ -24,6 +24,7 @@ public:
   TextTestResult();
 
   virtual void addFailure( const TestFailure &failure );
+  virtual void addSkipped( const TestSkipped &skipped );
   virtual void startTest( Test *test );
   virtual void print( OStream &stream );
 };

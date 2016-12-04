@@ -12,6 +12,7 @@ class Exception;
 class SourceLine;
 class Test;
 class TestFailure;
+class TestSkipped;
 class TestResultCollector;
 
 /*! 

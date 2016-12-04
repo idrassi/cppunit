@@ -61,6 +61,7 @@ public:
   // overrided from TestListener;
   void startTest( CPPUNIT_NS::Test *test );
   void addFailure( const CPPUNIT_NS::TestFailure &failure );
+  void addSkipped( const CPPUNIT_NS::TestSkipped &skipped );
   void endTest( CPPUNIT_NS::Test *test );
 
   // IDD is not use, it is just there for the wizard.
@@ -106,6 +107,7 @@ protected:
   int m_testsRun;
   int m_errors;
   int m_failures;
+  int m_skipped;
   DWORD m_testStartTime;
   DWORD m_testEndTime;
   static const CString ms_cppunitKey;
@@ -118,10 +120,12 @@ protected:
   enum ErrorTypeBitmaps
   {
     errorTypeFailure =0,
-    errorTypeError
+    errorTypeError,
+    errorTypeSkipped,
   };
 
   void addListEntry( const CPPUNIT_NS::TestFailure &failure );
+  void addListEntry( const CPPUNIT_NS::TestSkipped &skipped );
   void beIdle();
   void beRunning();
   void beRunDisabled();
@@ -144,6 +148,7 @@ protected:
   TestRunnerModel &model();
   void updateHistoryCombo();
   void displayFailureDetailsFor( unsigned int failureIndex );
+  void TestRunnerDlg::clearListItems();
 
   CRect getItemWindowRect( unsigned int itemId );
   CRect getItemClientRect( unsigned int itemId );

@@ -221,7 +221,7 @@ TestRunnerDlg::addListEntry( const CPPUNIT_NS::TestFailure &failure )
 {
   CListCtrl *listCtrl = (CListCtrl *)GetDlgItem (IDC_LIST);
   int currentEntry = m_result->testErrors() + 
-                     m_result->testFailures() -1;
+     m_result->testFailures()  + m_result->testsSkipped() -1;
 
   ErrorTypeBitmaps errorType;
   if ( failure.isError() )
@@ -231,10 +231,10 @@ TestRunnerDlg::addListEntry( const CPPUNIT_NS::TestFailure &failure )
 
   ListCtrlSetter setter( *listCtrl );
   setter.insertLine( currentEntry );
-  setter.addSubItem( failure.isError() ? _T("Error") : _T("Failure"), errorType );
+  setter.addSubItem( failure.isError() ? _T("Error") : _T("Failure"), (void*) failure.clone(), errorType );
 
   // Set test name
-  setter.addSubItem( failure.failedTestName().c_str(), errorType );
+  setter.addSubItem( failure.failedTestName().c_str(),errorType );
 
   // Set the asserted text
   CString message( failure.thrownException()->message().shortDescription().c_str() );
@@ -265,6 +265,50 @@ TestRunnerDlg::addListEntry( const CPPUNIT_NS::TestFailure &failure )
   listCtrl->UpdateWindow();
 }
 
+void 
+TestRunnerDlg::addListEntry( const CPPUNIT_NS::TestSkipped &skipped )
+{
+  CListCtrl *listCtrl = (CListCtrl *)GetDlgItem (IDC_LIST);
+  int currentEntry = m_result->testErrors() + 
+     m_result->testFailures()  + m_result->testsSkipped() -1;
+
+  ErrorTypeBitmaps errorType = errorTypeSkipped;
+
+  ListCtrlSetter setter( *listCtrl );
+  setter.insertLine( currentEntry );
+  setter.addSubItem( _T("Skipped"), (void*) skipped.clone(), errorType );
+
+  // Set test name
+  setter.addSubItem( skipped.skippedTestName().c_str(),errorType );
+
+  // Set the asserted text
+  CString message( skipped.thrownException()->message().shortDescription().c_str() );
+  message.Replace( '\n', ' ' );   // should only print the short description there,
+  setter.addSubItem( message);   // and dump the detail on an edit control when clicked.
+
+  // Set the line number
+  if ( skipped.sourceLine().isValid() )
+  {
+    CString lineNumber;
+    lineNumber.Format( _T("%ld"), skipped.sourceLine().lineNumber() );
+    setter.addSubItem( lineNumber);
+  }
+  else
+    setter.addSubItem( _T(""));
+
+  // Set the file name
+  setter.addSubItem( skipped.sourceLine().fileName().c_str() );
+
+  if ( !listCtrl->GetFirstSelectedItemPosition() )
+  {
+    // Select first entry => display details of first entry.
+    listCtrl->SetItemState( currentEntry, LVIS_SELECTED, LVIS_SELECTED );
+    listCtrl->SetFocus();   // Does not work ?!?
+  }
+
+  listCtrl->RedrawItems( currentEntry, currentEntry );
+  listCtrl->UpdateWindow();
+}
 
 void 
 TestRunnerDlg::startTest( CPPUNIT_NS::Test *test )
@@ -283,6 +327,15 @@ TestRunnerDlg::addFailure( const CPPUNIT_NS::TestFailure &failure )
     m_errors++;
   else
     m_failures++;
+
+  updateCountsDisplay();
+}
+
+void 
+TestRunnerDlg::addSkipped( const CPPUNIT_NS::TestSkipped &skipped )
+{
+  addListEntry( skipped );
+  m_skipped++;
 
   updateCountsDisplay();
 }
@@ -365,11 +418,13 @@ TestRunnerDlg::reset()
   m_testsRun = 0;
   m_errors = 0;
   m_failures = 0;
+  m_skipped = 0;
   m_testEndTime = m_testStartTime;
 
   updateCountsDisplay();
 
   freeState();
+  clearListItems ();
   CListCtrl *listCtrl = (CListCtrl *)GetDlgItem (IDC_LIST);
 
   listCtrl->DeleteAllItems();
@@ -384,6 +439,7 @@ TestRunnerDlg::updateCountsDisplay()
   CStatic *statTestsRun = (CStatic *)GetDlgItem( IDC_STATIC_RUNS );
   CStatic *statErrors = (CStatic *)GetDlgItem( IDC_STATIC_ERRORS );
   CStatic *statFailures = (CStatic *)GetDlgItem( IDC_STATIC_FAILURES );
+  CStatic *statSkipped = (CStatic *)GetDlgItem( IDC_STATIC_SKIPPED );
   CEdit *editTime = (CEdit *)GetDlgItem( IDC_EDIT_TIME );
 
   CString argumentString;
@@ -396,6 +452,9 @@ TestRunnerDlg::updateCountsDisplay()
 
   argumentString.Format( _T("%d"), m_failures );
   statFailures->SetWindowText( argumentString );
+
+  argumentString.Format( _T("%d"), m_skipped );
+  statSkipped->SetWindowText( argumentString );
 
   argumentString.Format( _T("Execution time: %3.3lf seconds"), 
                          (m_testEndTime - m_testStartTime) / 1000.0 );
@@ -421,6 +480,7 @@ TestRunnerDlg::OnOK()
 
   UpdateData();
   saveSettings();
+  clearListItems ();
 
   cdxCDynamicDialog::OnOK ();
 }
@@ -546,6 +606,7 @@ TestRunnerDlg::OnQuitApplication()
 
   UpdateData();
   saveSettings();
+  clearListItems ();
   
   CWinApp *app = AfxGetApp();
   ASSERT( app != NULL );
@@ -654,11 +715,16 @@ TestRunnerDlg::OnSelectedFailureChange( NMHDR* pNMHDR,
 
 
 void 
-TestRunnerDlg::displayFailureDetailsFor( unsigned int failureIndex )
+TestRunnerDlg::displayFailureDetailsFor( unsigned int itemIndex )
 {
   CString details;
-  if ( m_result  &&  failureIndex < m_result->failures().size() )
-    details = m_result->failures()[ failureIndex ]->thrownException()->what();
+
+  if (itemIndex < (unsigned int) m_listCtrl.GetItemCount())
+  {
+   CPPUNIT_NS::TestOutcome* p = (CPPUNIT_NS::TestOutcome*) m_listCtrl.GetItemData (itemIndex);
+
+   details = ((CPPUNIT_NS::TestFailure*) p)->thrownException()->what();
+  }
 
   details.Replace( _T("\n"), _T("\r\n") );
 
@@ -674,4 +740,14 @@ TestRunnerDlg::initializeFixedSizeFont()
   font.lfPitchAndFamily = FIXED_PITCH | //VARIABLE_PITCH
                           (font.lfPitchAndFamily & ~15);   // font family
   m_fixedSizeFont.CreateFontIndirect( &font );
+}
+
+void 
+TestRunnerDlg::clearListItems( )
+{
+   for (int i = 0; i < m_listCtrl.GetItemCount(); i++)
+   {
+      CPPUNIT_NS::TestOutcome* p = (CPPUNIT_NS::TestOutcome*) m_listCtrl.GetItemData (i);
+      delete p;
+   }
 }

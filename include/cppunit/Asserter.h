@@ -56,6 +56,17 @@ struct Asserter
                                 const SourceLine &sourceLine = SourceLine() );
 
   /*! \brief Throws a Exception with the specified message and location.
+   */
+  static void CPPUNIT_API skip( const Message &message, 
+                                const SourceLine &sourceLine = SourceLine() );
+
+  /*! \brief Throws a Exception with the specified message and location.
+   * \deprecated Use fail( Message, SourceLine ) instead.
+   */
+  static void CPPUNIT_API skip( std::string message, 
+                                const SourceLine &sourceLine = SourceLine() );
+
+  /*! \brief Throws a Exception with the specified message and location.
    * \param shouldFail if \c true then the exception is thrown. Otherwise
    *                   nothing happen.
    * \param message Message explaining the assertion failiure.
