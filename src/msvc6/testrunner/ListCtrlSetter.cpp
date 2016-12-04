@@ -80,7 +80,7 @@ ListCtrlSetter::addSubItem( const CString &strText,
                             void *lParam,
                             int nImage )
 {
-  doAddSubItem( LVIF_TEXT | LVIF_IMAGE | LVIF_PARAM, strText, 0, lParam );
+  doAddSubItem( LVIF_TEXT | LVIF_IMAGE | LVIF_PARAM, strText, nImage, lParam );
 }
 
 
