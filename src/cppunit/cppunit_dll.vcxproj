@@ -68,23 +68,25 @@
     <OutDir>.\DebugDll\</OutDir>
     <IntDir>.\DebugDll\</IntDir>
     <LinkIncremental>true</LinkIncremental>
-    <TargetName>cppunitd_dll</TargetName>
+    <TargetName>cppunit32d_dll</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>.\DebugDll\</OutDir>
     <IntDir>.\DebugDll\</IntDir>
     <LinkIncremental>true</LinkIncremental>
-    <TargetName>cppunitd_dll</TargetName>
+    <TargetName>cppunit64d_dll</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>.\ReleaseDll\</OutDir>
     <IntDir>.\ReleaseDll\</IntDir>
     <LinkIncremental>false</LinkIncremental>
+    <TargetName>$(ProjectName)32</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>.\ReleaseDll\</OutDir>
     <IntDir>.\ReleaseDll\</IntDir>
     <LinkIncremental>false</LinkIncremental>
+    <TargetName>$(ProjectName)64</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -129,8 +131,8 @@ copy "$(TargetDir)$(TargetName).lib" ..\..\lib\$(TargetName).lib</Command>
       <LinkDLL>true</LinkDLL>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
-      <OutputFile>DebugDll\cppunitd_dll.dll</OutputFile>
-      <ImportLibrary>.\DebugDll\cppunitd_dll.lib</ImportLibrary>
+      <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
+      <ImportLibrary>$(OutDir)$(TargetName).lib</ImportLibrary>
       <AdditionalDependencies>odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -175,8 +177,8 @@ copy "$(TargetDir)$(TargetName).lib" ..\..\lib\$(TargetName).lib</Command>
       <LinkDLL>true</LinkDLL>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
-      <OutputFile>DebugDll\cppunitd_dll.dll</OutputFile>
-      <ImportLibrary>.\DebugDll\cppunitd_dll.lib</ImportLibrary>
+      <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
+      <ImportLibrary>$(OutDir)$(TargetName).lib</ImportLibrary>
       <AdditionalDependencies>odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -222,8 +224,8 @@ copy "$(TargetDir)$(TargetName).lib" ..\..\lib\$(TargetName).lib</Command>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <LinkDLL>true</LinkDLL>
       <SubSystem>Console</SubSystem>
-      <OutputFile>.\ReleaseDll\cppunit_dll.dll</OutputFile>
-      <ImportLibrary>.\ReleaseDll\cppunit_dll.lib</ImportLibrary>
+      <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
+      <ImportLibrary>$(OutDir)$(TargetName).lib</ImportLibrary>
       <AdditionalDependencies>odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -268,8 +270,8 @@ copy "$(TargetDir)$(TargetName).lib" ..\..\lib\$(TargetName).lib</Command>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <LinkDLL>true</LinkDLL>
       <SubSystem>Console</SubSystem>
-      <OutputFile>.\ReleaseDll\cppunit_dll.dll</OutputFile>
-      <ImportLibrary>.\ReleaseDll\cppunit_dll.lib</ImportLibrary>
+      <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
+      <ImportLibrary>$(OutDir)$(TargetName).lib</ImportLibrary>
       <AdditionalDependencies>odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>

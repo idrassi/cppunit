@@ -117,47 +117,49 @@
     <OutDir>.\Debug\</OutDir>
     <IntDir>.\Debug\</IntDir>
     <LinkIncremental>false</LinkIncremental>
-    <TargetName>testrunnerd</TargetName>
+    <TargetName>testrunner32d</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>.\Debug\</OutDir>
     <IntDir>.\Debug\</IntDir>
     <LinkIncremental>false</LinkIncremental>
-    <TargetName>testrunnerd</TargetName>
+    <TargetName>testrunner64d</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release Unicode|Win32'">
     <OutDir>.\ReleaseUnicode\</OutDir>
     <IntDir>.\ReleaseUnicode\</IntDir>
     <LinkIncremental>false</LinkIncremental>
-    <TargetName>testrunneru</TargetName>
+    <TargetName>testrunner32u</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release Unicode|x64'">
     <OutDir>.\ReleaseUnicode\</OutDir>
     <IntDir>.\ReleaseUnicode\</IntDir>
     <LinkIncremental>false</LinkIncremental>
-    <TargetName>testrunneru</TargetName>
+    <TargetName>testrunner64u</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|Win32'">
     <OutDir>.\DebugUnicode\</OutDir>
     <IntDir>.\DebugUnicode\</IntDir>
     <LinkIncremental>false</LinkIncremental>
-    <TargetName>testrunnerud</TargetName>
+    <TargetName>testrunner32ud</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|x64'">
     <OutDir>.\DebugUnicode\</OutDir>
     <IntDir>.\DebugUnicode\</IntDir>
     <LinkIncremental>false</LinkIncremental>
-    <TargetName>testrunnerud</TargetName>
+    <TargetName>testrunner64ud</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>.\Release\</OutDir>
     <IntDir>.\Release\</IntDir>
     <LinkIncremental>false</LinkIncremental>
+    <TargetName>$(ProjectName)32</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>.\Release\</OutDir>
     <IntDir>.\Release\</IntDir>
     <LinkIncremental>false</LinkIncremental>
+    <TargetName>$(ProjectName)64</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -206,9 +208,9 @@ copy "$(TargetDir)$(TargetName).lib" ..\..\..\lib\$(TargetName).lib</Command>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
       <ModuleDefinitionFile>.\TestRunner.def</ModuleDefinitionFile>
-      <OutputFile>Debug\testrunnerd.dll</OutputFile>
-      <ImportLibrary>.\Debug\testrunnerd.lib</ImportLibrary>
-      <AdditionalDependencies>..\..\..\lib\cppunitd.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(OutDir)\$(TargetName)$(TargetExt)</OutputFile>
+      <ImportLibrary>$(OutDir)\$(TargetName).lib</ImportLibrary>
+      <AdditionalDependencies>..\..\..\lib\cppunit32d.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -256,9 +258,9 @@ copy "$(TargetDir)$(TargetName).lib" ..\..\..\lib\$(TargetName).lib</Command>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
       <ModuleDefinitionFile>.\TestRunner.def</ModuleDefinitionFile>
-      <OutputFile>Debug\testrunnerd.dll</OutputFile>
-      <ImportLibrary>.\Debug\testrunnerd.lib</ImportLibrary>
-      <AdditionalDependencies>..\..\..\lib\cppunitd.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(OutDir)\$(TargetName)$(TargetExt)</OutputFile>
+      <ImportLibrary>$(OutDir)\$(TargetName).lib</ImportLibrary>
+      <AdditionalDependencies>..\..\..\lib\cppunit64d.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release Unicode|Win32'">
@@ -307,9 +309,9 @@ copy "$(TargetDir)$(TargetName).lib" ..\..\..\lib\$(TargetName).lib</Command>
       <LinkDLL>true</LinkDLL>
       <SubSystem>Windows</SubSystem>
       <ModuleDefinitionFile>.\TestRunner.def</ModuleDefinitionFile>
-      <OutputFile>ReleaseUnicode\testrunneru.dll</OutputFile>
-      <ImportLibrary>.\ReleaseUnicode\testrunneru.lib</ImportLibrary>
-      <AdditionalDependencies>..\..\..\lib\cppunit.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(OutDir)\$(TargetName)$(TargetExt)</OutputFile>
+      <ImportLibrary>$(OutDir)\$(TargetName).lib</ImportLibrary>
+      <AdditionalDependencies>..\..\..\lib\cppunit32.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release Unicode|x64'">
@@ -357,9 +359,9 @@ copy "$(TargetDir)$(TargetName).lib" ..\..\..\lib\$(TargetName).lib</Command>
       <LinkDLL>true</LinkDLL>
       <SubSystem>Windows</SubSystem>
       <ModuleDefinitionFile>.\TestRunner.def</ModuleDefinitionFile>
-      <OutputFile>ReleaseUnicode\testrunneru.dll</OutputFile>
-      <ImportLibrary>.\ReleaseUnicode\testrunneru.lib</ImportLibrary>
-      <AdditionalDependencies>..\..\..\lib\cppunit.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(OutDir)\$(TargetName)$(TargetExt)</OutputFile>
+      <ImportLibrary>$(OutDir)\$(TargetName).lib</ImportLibrary>
+      <AdditionalDependencies>..\..\..\lib\cppunit64.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|Win32'">
@@ -409,9 +411,9 @@ copy "$(TargetDir)$(TargetName).lib" ..\..\..\lib\$(TargetName).lib</Command>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
       <ModuleDefinitionFile>.\TestRunner.def</ModuleDefinitionFile>
-      <OutputFile>DebugUnicode\testrunnerud.dll</OutputFile>
-      <ImportLibrary>.\DebugUnicode\testrunnerud.lib</ImportLibrary>
-      <AdditionalDependencies>..\..\..\lib\cppunitd.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(OutDir)\$(TargetName)$(TargetExt)</OutputFile>
+      <ImportLibrary>$(OutDir)\$(TargetName).lib</ImportLibrary>
+      <AdditionalDependencies>..\..\..\lib\cppunit32d.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|x64'">
@@ -459,9 +461,9 @@ copy "$(TargetDir)$(TargetName).lib" ..\..\..\lib\$(TargetName).lib</Command>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
       <ModuleDefinitionFile>.\TestRunner.def</ModuleDefinitionFile>
-      <OutputFile>DebugUnicode\testrunnerud.dll</OutputFile>
-      <ImportLibrary>.\DebugUnicode\testrunnerud.lib</ImportLibrary>
-      <AdditionalDependencies>..\..\..\lib\cppunitd.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(OutDir)\$(TargetName)$(TargetExt)</OutputFile>
+      <ImportLibrary>$(OutDir)\$(TargetName).lib</ImportLibrary>
+      <AdditionalDependencies>..\..\..\lib\cppunit64d.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -510,9 +512,9 @@ copy "$(TargetDir)$(TargetName).lib" ..\..\..\lib\$(TargetName).lib</Command>
       <LinkDLL>true</LinkDLL>
       <SubSystem>Windows</SubSystem>
       <ModuleDefinitionFile>.\TestRunner.def</ModuleDefinitionFile>
-      <OutputFile>.\Release\TestRunner.dll</OutputFile>
-      <ImportLibrary>.\Release\TestRunner.lib</ImportLibrary>
-      <AdditionalDependencies>..\..\..\lib\cppunit.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(OutDir)\$(TargetName)$(TargetExt)</OutputFile>
+      <ImportLibrary>$(OutDir)\$(TargetName).lib</ImportLibrary>
+      <AdditionalDependencies>..\..\..\lib\cppunit32.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -560,9 +562,9 @@ copy "$(TargetDir)$(TargetName).lib" ..\..\..\lib\$(TargetName).lib</Command>
       <LinkDLL>true</LinkDLL>
       <SubSystem>Windows</SubSystem>
       <ModuleDefinitionFile>.\TestRunner.def</ModuleDefinitionFile>
-      <OutputFile>.\Release\TestRunner.dll</OutputFile>
-      <ImportLibrary>.\Release\TestRunner.lib</ImportLibrary>
-      <AdditionalDependencies>..\..\..\lib\cppunit.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(OutDir)\$(TargetName)$(TargetExt)</OutputFile>
+      <ImportLibrary>$(OutDir)\$(TargetName).lib</ImportLibrary>
+      <AdditionalDependencies>..\..\..\lib\cppunit64.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
