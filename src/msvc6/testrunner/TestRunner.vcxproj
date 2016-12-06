@@ -183,6 +183,7 @@
     </ClCompile>
     <PostBuildEvent>
       <Command>copy "$(TargetPath)" ..\..\..\lib\$(TargetName).dll
+
 copy "$(TargetDir)$(TargetName).lib" ..\..\..\lib\$(TargetName).lib</Command>
       <Message>Copying target to lib/</Message>
     </PostBuildEvent>
@@ -234,6 +235,7 @@ copy "$(TargetDir)$(TargetName).lib" ..\..\..\lib\$(TargetName).lib</Command>
     </ClCompile>
     <PostBuildEvent>
       <Command>copy "$(TargetPath)" ..\..\..\lib\$(TargetName).dll
+
 copy "$(TargetDir)$(TargetName).lib" ..\..\..\lib\$(TargetName).lib</Command>
       <Message>Copying target to lib/</Message>
     </PostBuildEvent>
@@ -285,6 +287,7 @@ copy "$(TargetDir)$(TargetName).lib" ..\..\..\lib\$(TargetName).lib</Command>
     </ClCompile>
     <PostBuildEvent>
       <Command>copy "$(TargetPath)" ..\..\..\lib\$(TargetName).dll
+
 copy "$(TargetDir)$(TargetName).lib" ..\..\..\lib\$(TargetName).lib</Command>
       <Message>Copying target to lib/</Message>
     </PostBuildEvent>
@@ -336,6 +339,7 @@ copy "$(TargetDir)$(TargetName).lib" ..\..\..\lib\$(TargetName).lib</Command>
     </ClCompile>
     <PostBuildEvent>
       <Command>copy "$(TargetPath)" ..\..\..\lib\$(TargetName).dll
+
 copy "$(TargetDir)$(TargetName).lib" ..\..\..\lib\$(TargetName).lib</Command>
       <Message>Copying target to lib/</Message>
     </PostBuildEvent>
@@ -386,6 +390,7 @@ copy "$(TargetDir)$(TargetName).lib" ..\..\..\lib\$(TargetName).lib</Command>
     </ClCompile>
     <PostBuildEvent>
       <Command>copy "$(TargetPath)" ..\..\..\lib\$(TargetName).dll
+
 copy "$(TargetDir)$(TargetName).lib" ..\..\..\lib\$(TargetName).lib</Command>
       <Message>Copying target to lib/</Message>
     </PostBuildEvent>
@@ -437,6 +442,7 @@ copy "$(TargetDir)$(TargetName).lib" ..\..\..\lib\$(TargetName).lib</Command>
     </ClCompile>
     <PostBuildEvent>
       <Command>copy "$(TargetPath)" ..\..\..\lib\$(TargetName).dll
+
 copy "$(TargetDir)$(TargetName).lib" ..\..\..\lib\$(TargetName).lib</Command>
       <Message>Copying target to lib/</Message>
     </PostBuildEvent>
@@ -488,6 +494,7 @@ copy "$(TargetDir)$(TargetName).lib" ..\..\..\lib\$(TargetName).lib</Command>
     </ClCompile>
     <PostBuildEvent>
       <Command>copy "$(TargetPath)" ..\..\..\lib\$(TargetName).dll
+
 copy "$(TargetDir)$(TargetName).lib" ..\..\..\lib\$(TargetName).lib</Command>
       <Message>Copying target to lib/</Message>
     </PostBuildEvent>
@@ -539,6 +546,7 @@ copy "$(TargetDir)$(TargetName).lib" ..\..\..\lib\$(TargetName).lib</Command>
     </ClCompile>
     <PostBuildEvent>
       <Command>copy "$(TargetPath)" ..\..\..\lib\$(TargetName).dll
+
 copy "$(TargetDir)$(TargetName).lib" ..\..\..\lib\$(TargetName).lib</Command>
       <Message>Copying target to lib/</Message>
     </PostBuildEvent>
